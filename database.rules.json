@@ -1,0 +1,23 @@
+{
+  "rules": {
+    "drivers": {
+      "$uid": {
+        ".read": "auth != null",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "codes": {
+      "$code": {
+        ".read": "auth != null",
+        ".write": "auth != null && ((!data.exists() && newData.val() === auth.uid) || (data.exists() && data.val() === auth.uid))"
+      }
+    },
+    "byDriver": {
+      "$driverId": {
+        ".read": "auth != null && auth.uid === $driverId",
+        ".write": "auth != null && auth.uid === $driverId",
+        "$studentId": { ".write": "auth != null && auth.uid === $studentId" }
+      }
+    }
+  }
+}
